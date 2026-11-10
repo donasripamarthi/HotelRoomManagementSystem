@@ -3,110 +3,453 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StayEase | Hotel Management</title>
+  <meta name="theme-color" content="#142238">
+  <title>StayComfort | Hotel Management</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <aside class="sidebar">
-    <div class="brand"><span class="brand-icon">⌂</span><div><b>StayEase</b><small>HOTEL MANAGEMENT</small></div></div>
-    <nav>
-      <button class="nav-link active" data-page="dashboard">▦ <span>Dashboard</span></button>
-      <button class="nav-link" data-page="rooms">▤ <span>Rooms</span></button>
-      <button class="nav-link" data-page="guests">♙ <span>Guests</span></button>
-      <button class="nav-link" data-page="stays">⇄ <span>Check-in / Check-out</span></button>
-      <button class="nav-link" data-page="maintenance">⚒ <span>Maintenance</span></button>
+    <a class="brand" href="#" aria-label="StayComfort home">
+      <span class="brand-icon">⌂</span>
+      <span>
+        <b>StayComfort</b>
+        <small>HOTEL MANAGEMENT</small>
+      </span>
+    </a>
+
+    <div class="nav-label">MAIN MENU</div>
+
+    <nav aria-label="Main navigation">
+      <button class="nav-link active" data-page="dashboard">
+        <span class="nav-icon">▦</span><span>Dashboard</span>
+      </button>
+      <button class="nav-link" data-page="rooms">
+        <span class="nav-icon">▤</span><span>Rooms</span>
+      </button>
+      <button class="nav-link" data-page="guests">
+        <span class="nav-icon">♙</span><span>Guests</span>
+      </button>
+      <button class="nav-link" data-page="stays">
+        <span class="nav-icon">⇄</span><span>Check-in / Check-out</span>
+      </button>
+      <button class="nav-link" data-page="maintenance">
+        <span class="nav-icon">⚒</span><span>Maintenance</span>
+      </button>
     </nav>
-    <div class="sidebar-foot"><span class="online-dot"></span> Backend connection<br><small>Java · MySQL</small></div>
+
+    <div class="sidebar-foot">
+      <span class="online-dot"></span>
+      <span>Backend connection
+        <small>Java · MySQL</small>
+      </span>
+    </div>
   </aside>
 
   <main class="main">
+
     <header class="topbar">
-      <div><div class="eyebrow">HOTEL OPERATIONS</div><h1 id="page-title">Dashboard</h1></div>
-      <div class="top-actions"><span class="today" id="today"></span><button class="btn btn-light" id="refreshBtn">↻ Refresh</button></div>
+      <div>
+        <div class="eyebrow">HOTEL OPERATIONS</div>
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+      <div class="top-actions">
+        <span class="today" id="today"></span>
+        <button class="btn btn-light" id="refreshBtn" type="button">↻ Refresh</button>
+      </div>
     </header>
 
+    <!-- DASHBOARD -->
     <section class="page active" id="dashboard-page">
-      <div class="welcome"><div><h2>Welcome back!</h2><p>Here is what's happening at your hotel today.</p></div><div class="welcome-mark">✦</div></div>
+
+      <div class="welcome">
+        <div class="welcome-content">
+          <span class="welcome-kicker">A FRIENDLY PLACE TO STAY</span>
+          <h2>A comfortable stay, made simple.</h2>
+          <p>Welcome! Here is your hotel activity for today.</p>
+          <button class="btn btn-gold" type="button" data-goto="rooms">
+            View rooms <span>→</span>
+          </button>
+        </div>
+      </div>
+
       <div class="stats">
-        <article class="stat-card"><div class="stat-top"><span>Total rooms</span><span class="stat-icon purple">▤</span></div><strong id="totalRooms">—</strong><small>Registered rooms</small></article>
-        <article class="stat-card"><div class="stat-top"><span>Available rooms</span><span class="stat-icon green">✓</span></div><strong id="availableRooms">—</strong><small>Ready for guests</small></article>
-        <article class="stat-card"><div class="stat-top"><span>Occupied rooms</span><span class="stat-icon blue">♙</span></div><strong id="occupiedRooms">—</strong><small>Currently occupied</small></article>
-        <article class="stat-card"><div class="stat-top"><span>Maintenance</span><span class="stat-icon orange">⚒</span></div><strong id="maintenanceRooms">—</strong><small>Unavailable rooms</small></article>
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Total rooms</span>
+            <span class="stat-icon purple">▤</span>
+          </div>
+          <strong id="totalRooms">—</strong>
+          <small>Registered rooms</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Available rooms</span>
+            <span class="stat-icon green">✓</span>
+          </div>
+          <strong id="availableRooms">—</strong>
+          <small>Ready for guests</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Occupied rooms</span>
+            <span class="stat-icon blue">♙</span>
+          </div>
+          <strong id="occupiedRooms">—</strong>
+          <small>Currently occupied</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Maintenance</span>
+            <span class="stat-icon orange">⚒</span>
+          </div>
+          <strong id="maintenanceRooms">—</strong>
+          <small>Unavailable rooms</small>
+        </article>
       </div>
+
       <div class="content-grid">
-        <article class="panel"><div class="panel-heading"><div><h3>Recent check-ins</h3><p>Latest guest arrivals</p></div><button class="text-btn" data-goto="stays">View all →</button></div><div id="recentCheckIns" class="activity-list"><div class="empty">Loading activity…</div></div></article>
-        <article class="panel"><div class="panel-heading"><div><h3>Recent check-outs</h3><p>Latest guest departures</p></div><button class="text-btn" data-goto="stays">View all →</button></div><div id="recentCheckOuts" class="activity-list"><div class="empty">Loading activity…</div></div></article>
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Recent check-ins</h3>
+              <p>Latest guest arrivals</p>
+            </div>
+            <button class="text-btn" data-goto="stays" type="button">View all →</button>
+          </div>
+          <div id="recentCheckIns" class="activity-list">
+            <div class="empty">Loading activity…</div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Recent check-outs</h3>
+              <p>Latest guest departures</p>
+            </div>
+            <button class="text-btn" data-goto="stays" type="button">View all →</button>
+          </div>
+          <div id="recentCheckOuts" class="activity-list">
+            <div class="empty">Loading activity…</div>
+          </div>
+        </article>
       </div>
-      <div class="notice"><b>Quick tip</b><span>Register a guest before assigning a room. Rooms under maintenance cannot be assigned.</span></div>
+
+      <div class="notice">
+        <b>Quick tip</b>
+        <span>Register a guest before assigning a room. Rooms under maintenance cannot be assigned.</span>
+      </div>
+
     </section>
 
+    <!-- ROOMS -->
     <section class="page" id="rooms-page">
-      <div class="section-heading"><div><h2>Room management</h2><p>View room types, prices and current maintenance status.</p></div><button class="btn btn-primary" id="roomsRefresh">↻ Refresh rooms</button></div>
-      <div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>Room</th><th>Type</th><th>Daily price</th><th>Maintenance</th></tr></thead><tbody id="roomsTable"><tr><td colspan="4" class="empty">Loading rooms…</td></tr></tbody></table></div></div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Room management</h2>
+          <p>View room types, prices and current maintenance status.</p>
+        </div>
+        <button class="btn btn-primary" id="roomsRefresh" type="button">
+          ↻ Refresh rooms
+        </button>
+      </div>
+
+      <div class="room-banner">
+        <div>
+          <span>ROOMS &amp; RATES</span>
+          <h3>Simple, clean and comfortable rooms.</h3>
+        </div>
+      </div>
+
+      <div class="panel table-panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Room</th>
+                <th>Type</th>
+                <th>Daily price</th>
+                <th>Maintenance</th>
+              </tr>
+            </thead>
+            <tbody id="roomsTable">
+              <tr><td colspan="4" class="empty">Loading rooms…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </section>
 
+    <!-- GUESTS -->
     <section class="page" id="guests-page">
-      <div class="section-heading"><div><h2>Guest management</h2><p>Register guests and view guest details.</p></div></div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Guest management</h2>
+          <p>Register guests and view guest details.</p>
+        </div>
+      </div>
+
       <div class="two-col">
-        <article class="panel form-panel"><h3>Register a guest</h3><p class="muted">Enter the guest's details below.</p>
+
+        <article class="panel form-panel">
+          <h3>Register a guest</h3>
+          <p class="muted">Enter the guest's details below.</p>
+
           <form id="guestForm">
-            <label>Guest name<input name="name" required maxlength="100" placeholder="Full name"></label>
-            <label>Phone number<input name="phone" required pattern="[0-9]{10,15}" placeholder="10–15 digits"></label>
-            <label>Email address<input name="email" type="email" placeholder="Optional"></label>
-            <label>Address<input name="address" placeholder="Guest address"></label>
-            <label>Government ID<input name="governmentId" required placeholder="ID number"></label>
-            <button class="btn btn-primary" type="submit">+ Register guest</button>
+
+            <label for="guestName">Guest name</label>
+            <input
+              type="text"
+              id="guestName"
+              name="name"
+              required
+              maxlength="100"
+              placeholder="Enter full name"
+              autocomplete="name"
+            >
+
+            <label for="guestPhone">Phone number</label>
+            <input
+              type="tel"
+              id="guestPhone"
+              name="phone"
+              required
+              pattern="[0-9]{10,15}"
+              maxlength="15"
+              placeholder="Enter 10–15 digits"
+              autocomplete="tel"
+            >
+
+            <label for="guestEmail">Email address</label>
+            <input
+              type="email"
+              id="guestEmail"
+              name="email"
+              placeholder="Optional"
+              autocomplete="email"
+            >
+
+            <label for="guestAddress">Address</label>
+            <input
+              type="text"
+              id="guestAddress"
+              name="address"
+              placeholder="Enter guest address"
+              autocomplete="street-address"
+            >
+
+            <label for="guestGovernmentId">Government ID</label>
+            <input
+              type="text"
+              id="guestGovernmentId"
+              name="governmentId"
+              required
+              placeholder="Enter ID number"
+            >
+
+            <button class="btn btn-primary" type="submit">
+              + Register guest
+            </button>
+
           </form>
         </article>
-        <article class="panel"><div class="panel-heading"><div><h3>Registered guests</h3><p>Guest directory</p></div><button class="text-btn" id="guestsRefresh">Refresh</button></div>
-          <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Email</th></tr></thead><tbody id="guestsTable"><tr><td colspan="4" class="empty">Loading guests…</td></tr></tbody></table></div>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Registered guests</h3>
+              <p>Guest directory</p>
+            </div>
+            <button class="text-btn" id="guestsRefresh" type="button">Refresh</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody id="guestsTable">
+                <tr><td colspan="4" class="empty">Loading guests…</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
+
       </div>
     </section>
 
+    <!-- CHECK-IN / CHECK-OUT -->
     <section class="page" id="stays-page">
-      <div class="section-heading"><div><h2>Check-in & check-out</h2><p>Assign rooms and manage active stays.</p></div><button class="btn btn-light" id="staysRefresh">↻ Refresh</button></div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Check-in &amp; check-out</h2>
+          <p>Assign rooms and manage active stays.</p>
+        </div>
+        <button class="btn btn-light" id="staysRefresh" type="button">↻ Refresh</button>
+      </div>
+
       <div class="two-col">
-        <article class="panel form-panel"><h3>Guest check-in</h3><p class="muted">Use the guest ID and room ID shown in the tables.</p>
+
+        <article class="panel form-panel">
+          <h3>Guest check-in</h3>
+          <p class="muted">Use the guest ID and room ID shown in the tables.</p>
+
           <form id="checkinForm">
-            <label>Guest ID<input name="guestId" type="number" min="1" required placeholder="e.g. 1"></label>
-            <label>Room ID<input name="roomId" type="number" min="1" required placeholder="e.g. 1"></label>
+            <label for="checkinGuestId">Guest ID</label>
+            <input id="checkinGuestId" name="guestId" type="number" min="1" required placeholder="e.g. 1">
+
+            <label for="checkinRoomId">Room ID</label>
+            <input id="checkinRoomId" name="roomId" type="number" min="1" required placeholder="e.g. 1">
+
             <button class="btn btn-primary" type="submit">Confirm check-in</button>
           </form>
         </article>
-        <article class="panel form-panel"><h3>Guest check-out</h3><p class="muted">Enter the active stay ID.</p>
+
+        <article class="panel form-panel">
+          <h3>Guest check-out</h3>
+          <p class="muted">Enter the active stay ID.</p>
+
           <form id="checkoutForm">
-            <label>Stay ID<input name="stayId" type="number" min="1" required placeholder="e.g. 1"></label>
+            <label for="checkoutStayId">Stay ID</label>
+            <input id="checkoutStayId" name="stayId" type="number" min="1" required placeholder="e.g. 1">
+
             <button class="btn btn-dark" type="submit">Complete check-out</button>
           </form>
         </article>
+
       </div>
-      <article class="panel table-panel"><div class="panel-heading"><div><h3>Stay history</h3><p>Active and completed stays</p></div></div><div class="table-wrap"><table><thead><tr><th>Stay ID</th><th>Guest ID</th><th>Room ID</th><th>Check-in</th><th>Check-out</th><th>Bill</th><th>Status</th></tr></thead><tbody id="staysTable"><tr><td colspan="7" class="empty">Loading stays…</td></tr></tbody></table></div></article>
+
+      <article class="panel table-panel">
+        <div class="panel-heading">
+          <div>
+            <h3>Stay history</h3>
+            <p>Active and completed stays</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Stay ID</th>
+                <th>Guest ID</th>
+                <th>Room ID</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Bill</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="staysTable">
+              <tr><td colspan="7" class="empty">Loading stays…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
     </section>
 
+    <!-- MAINTENANCE -->
     <section class="page" id="maintenance-page">
-      <div class="section-heading"><div><h2>Maintenance management</h2><p>Mark rooms unavailable while maintenance is in progress.</p></div><button class="btn btn-light" id="maintenanceRefresh">↻ Refresh</button></div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Maintenance management</h2>
+          <p>Mark rooms unavailable while maintenance is in progress.</p>
+        </div>
+        <button class="btn btn-light" id="maintenanceRefresh" type="button">↻ Refresh</button>
+      </div>
+
       <div class="two-col">
-        <article class="panel form-panel"><h3>Start maintenance</h3><p class="muted">Existing guest stays are preserved.</p>
+
+        <article class="panel form-panel">
+          <h3>Start maintenance</h3>
+          <p class="muted">Existing guest stays are preserved.</p>
+
           <form id="maintenanceForm">
-            <label>Room ID<input name="roomId" type="number" min="1" required placeholder="e.g. 1"></label>
-            <label>Reason<textarea name="reason" required rows="3" placeholder="Describe the maintenance issue"></textarea></label>
+            <label for="maintenanceRoomId">Room ID</label>
+            <input id="maintenanceRoomId" name="roomId" type="number" min="1" required placeholder="e.g. 1">
+
+            <label for="maintenanceReason">Reason</label>
+            <textarea id="maintenanceReason" name="reason" required rows="3" placeholder="Describe the maintenance issue"></textarea>
+
             <button class="btn btn-primary" type="submit">Start maintenance</button>
           </form>
         </article>
-        <article class="panel form-panel"><h3>Complete maintenance</h3><p class="muted">Enter the maintenance record ID.</p>
+
+        <article class="panel form-panel">
+          <h3>Complete maintenance</h3>
+          <p class="muted">Enter the maintenance record ID.</p>
+
           <form id="completeMaintenanceForm">
-            <label>Maintenance ID<input name="maintenanceId" type="number" min="1" required placeholder="e.g. 1"></label>
+            <label for="completeMaintenanceId">Maintenance ID</label>
+            <input id="completeMaintenanceId" name="maintenanceId" type="number" min="1" required placeholder="e.g. 1">
+
             <button class="btn btn-dark" type="submit">Mark as completed</button>
           </form>
         </article>
+
       </div>
-      <article class="panel table-panel"><div class="panel-heading"><div><h3>Maintenance records</h3><p>Current and previous maintenance jobs</p></div></div><div class="table-wrap"><table><thead><tr><th>Record ID</th><th>Room ID</th><th>Reason</th><th>Start date</th><th>End date</th><th>Status</th></tr></thead><tbody id="maintenanceTable"><tr><td colspan="6" class="empty">Loading records…</td></tr></tbody></table></div></article>
+
+      <article class="panel table-panel">
+        <div class="panel-heading">
+          <div>
+            <h3>Maintenance records</h3>
+            <p>Current and previous maintenance jobs</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Record ID</th>
+                <th>Room ID</th>
+                <th>Reason</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="maintenanceTable">
+              <tr><td colspan="6" class="empty">Loading records…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
     </section>
 
-    <footer>StayEase Hotel Management System <span>Built with Core Java · JDBC · MySQL</span></footer>
+    <footer>
+      StayComfort Hotel Management System
+      <span>Built with Core Java · JDBC · MySQL</span>
+    </footer>
+
   </main>
-  <div id="toast" class="toast"></div>
+
+  <!-- ROOM DOOR ANIMATION -->
+  <div id="roomDoorTransition" aria-hidden="true">
+    <div class="door left"><span class="door-handle"></span></div>
+    <div class="door right"><span class="door-handle"></span></div>
+    <div class="door-title">WELCOME</div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <script src="script.js"></script>
+
 </body>
 </html>
